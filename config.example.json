@@ -1,0 +1,12 @@
+{
+  "vm": {
+    "box": "bento/ubuntu-20.04",
+    "provider": {
+      "name": "<<The name of the virtual machine>>"
+    }
+  },
+  "github": {
+    "email": "<<The email address used for GitHub>>",
+    "token": "<<The personal access token used for GitHub>>"
+  }
+}
