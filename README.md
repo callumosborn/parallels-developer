@@ -1,6 +1,6 @@
 # Parallels Developer
 
-This project contains a collection of receipes to create a fully featured developer virtual machine configured for a variety of activities.
+This project contains a collection of recipes to create a fully featured developer virtual machine configured for a variety of activities.
 
 ## Recipes
 
