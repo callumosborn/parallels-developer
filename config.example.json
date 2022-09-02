@@ -1,0 +1,18 @@
+{
+  "vm": {
+    "box": "bento/ubuntu-20.04",
+    "provider": {
+      "name": "<<The name of the virtual machine>>"
+    }
+  },
+  "github": {
+    "email": "<<The email address used for GitHub>>",
+    "token": "<<The personal access token used for GitHub>>"
+  },
+  "aws": {
+    "access_key_id": "<<The access key id used for AWS>>",
+    "secret_access_key": "<<The secret access key used for AWS>>",
+    "region": "<<The default region used for AWS>>",
+    "output": "<<The default output used for AWS>>"
+  }
+}
