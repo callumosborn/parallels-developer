@@ -104,6 +104,10 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell",
     path: "provisioners/bootstrap.sh",
+    args: [
+      configuration["developer"]["name"],
+      configuration["developer"]["email"]
+    ],
     privileged: false
 
   config.vm.provision "shell",
@@ -111,21 +115,29 @@ Vagrant.configure("2") do |config|
     privileged: false
 
   config.vm.provision "shell",
-    path: "provisioners/github.sh",
+    path: "provisioners/ssh.sh",
     args: [
-      configuration["vm"]["provider"]["name"],
-      configuration["github"]["email"],
-      configuration["github"]["token"],
+      configuration["developer"]["email"]
     ],
     privileged: false
-  
+
   config.vm.provision "shell",
-    path: "provisioners/aws.sh",
+    path: "provisioners/github.sh",
     args: [
-      configuration["aws"]["access_key_id"],
-      configuration["aws"]["secret_access_key"],
-      configuration["aws"]["region"],
-      configuration["aws"]["output"],
+      configuration["github"]["title"],
+      configuration["github"]["token"]
     ],
+    privileged: false
+
+  config.vm.provision "shell",
+    path: "provisioners/repos.sh",
+    args: configuration["repos"],
+    run: "always",
+    privileged: false
+
+  config.vm.provision "shell",
+    path: "provisioners/vscode.sh",
+    args: configuration["vscode"]["extensions"],
+    run: "always",
     privileged: false
 end

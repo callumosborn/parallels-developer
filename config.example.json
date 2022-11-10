@@ -1,18 +1,25 @@
 {
   "vm": {
-    "box": "bento/ubuntu-20.04",
+    "box": "<<The virtual machine OS>>",
     "provider": {
       "name": "<<The name of the virtual machine>>"
     }
   },
+  "developer": {
+    "name": "<<The full name of the developer>>",
+    "email": "<<The email address of the developer>>"
+  },
   "github": {
     "email": "<<The email address used for GitHub>>",
+    "title": "<<The title to use for SSH key for GitHub>>",
     "token": "<<The personal access token used for GitHub>>"
   },
-  "aws": {
-    "access_key_id": "<<The access key id used for AWS>>",
-    "secret_access_key": "<<The secret access key used for AWS>>",
-    "region": "<<The default region used for AWS>>",
-    "output": "<<The default output used for AWS>>"
+  "repos": [
+    "<<owner/repository>>"
+  ],
+  "vscode": {
+    "extensions": [
+      "<<extension id>>"
+    ]
   }
 }

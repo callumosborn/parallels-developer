@@ -6,10 +6,13 @@ This project contains a collection of recipes to create a fully featured develop
 
 The recipes for the project can be found in the provisioners directory. For a background around provisioners, you can go to this [link](https://www.vagrantup.com/docs/provisioning).
 
+- [aws.sh](provisioners/aws.sh)
 - [bootstrap.sh](provisioners/bootstrap.sh)
 - [docker.sh](provisioners/docker.sh)
 - [github.sh](provisioners/github.sh)
-- [aws.sh](provisioners/aws.sh)
+- [repos.sh](provisioners/repos.sh)
+- [ssh.sh](provisioners/ssh.sh)
+- [vscode.sh](provisioners/vscode.sh)
 
 ## Getting Started
 
