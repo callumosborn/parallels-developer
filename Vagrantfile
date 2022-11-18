@@ -40,34 +40,16 @@ Vagrant.configure("2") do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
-  config.vm.box = configuration["vm"]["box"]
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.vm.provision "shell",
+    path: "provisioners/bootstrap.sh",
+    privileged: false
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  config.vm.box_check_update = true
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
-  # via 127.0.0.1 to disable public access
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
-
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
+  config.vm.provision "shell",
+    path: "provisioners/docker.sh",
+    privileged: false
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -75,69 +57,101 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "provisioners", "/home/vagrant/provisioners"
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  config.vm.provider "parallels" do |prl|
-    # Display the VirtualBox GUI when booting the machine
-    # vb.gui = true
-  
-    # Customize the amount of memory on the VM:
-    # vb.memory = "1024"
+  config.vm.define "develop" do |develop|
+    # Every Vagrant development environment requires a box. You can search for
+    # boxes at https://vagrantcloud.com/search.
+    develop.vm.box = configuration["develop"]["vm"]["box"]
 
-    # Customize the name of the VM
-    prl.name = configuration["vm"]["provider"]["name"]
+    # Disable automatic box update checking. If you disable this, then
+    # boxes will only be checked for updates when the user runs
+    # `vagrant box outdated`. This is not recommended.
+    develop.vm.box_check_update = true
 
-    # Ensure the latest sets of Parallels utilities are installed
-    prl.update_guest_tools = true
+    # Provider-specific configuration so you can fine-tune various
+    # backing providers for Vagrant. These expose provider-specific options.
+    #
+    develop.vm.provider "parallels" do |prl|
+      # Customize the amount of memory on the VM:
+      prl.memory = configuration["develop"]["vm"]["provider"]["memory"]
 
-    # A full clone of th box is created
-    prl.linked_clone = false
+      # Customize the name of the VM
+      prl.name = configuration["develop"]["vm"]["provider"]["name"]
+
+      # Ensure the latest sets of Parallels utilities are installed
+      prl.update_guest_tools = true
+
+      # A full clone of th box is created
+      prl.linked_clone = false
+    end
+
+    # Enable provisioning with a shell script. Additional provisioners such as
+    # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+    # documentation for more information about their specific syntax and use.
+    develop.vm.provision "shell",
+      path: "provisioners/ssh.sh",
+      args: [
+        configuration["developer"]["email"]
+      ],
+      privileged: false
+
+    develop.vm.provision "shell",
+      path: "provisioners/git.sh",
+      args: [
+        configuration["developer"]["name"],
+        configuration["developer"]["email"]
+      ],
+      privileged: false
+
+    develop.vm.provision "shell",
+      path: "provisioners/github.sh",
+      args: [
+        configuration["github"]["title"],
+        configuration["github"]["token"]
+      ],
+      privileged: false
+
+    develop.vm.provision "shell",
+      path: "provisioners/repos.sh",
+      args: configuration["repos"],
+      run: "always",
+      privileged: false
+
+    develop.vm.provision "shell",
+      path: "provisioners/vscode.sh",
+      args: configuration["vscode"]["extensions"],
+      run: "always",
+      privileged: false
   end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
 
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell",
-    path: "provisioners/bootstrap.sh",
-    args: [
-      configuration["developer"]["name"],
-      configuration["developer"]["email"]
-    ],
-    privileged: false
+  config.vm.define "deploy" do |deploy|
+    # Every Vagrant development environment requires a box. You can search for
+    # boxes at https://vagrantcloud.com/search.
+    deploy.vm.box = configuration["deploy"]["vm"]["box"]
 
-  config.vm.provision "shell",
-    path: "provisioners/docker.sh",
-    privileged: false
+    # Disable automatic box update checking. If you disable this, then
+    # boxes will only be checked for updates when the user runs
+    # `vagrant box outdated`. This is not recommended.
+    deploy.vm.box_check_update = true
 
-  config.vm.provision "shell",
-    path: "provisioners/ssh.sh",
-    args: [
-      configuration["developer"]["email"]
-    ],
-    privileged: false
+    # Create a private network, which allows host-only access to the machine
+    # using a specific IP.
+    deploy.vm.network "private_network", ip: configuration["deploy"]["vm"]["network"]["ip"]
 
-  config.vm.provision "shell",
-    path: "provisioners/github.sh",
-    args: [
-      configuration["github"]["title"],
-      configuration["github"]["token"]
-    ],
-    privileged: false
+    # Provider-specific configuration so you can fine-tune various
+    # backing providers for Vagrant. These expose provider-specific options.
+    #
+    deploy.vm.provider "parallels" do |prl|
+      # Customize the amount of memory on the VM:
+      prl.memory = configuration["deploy"]["vm"]["provider"]["memory"]
 
-  config.vm.provision "shell",
-    path: "provisioners/repos.sh",
-    args: configuration["repos"],
-    run: "always",
-    privileged: false
+      # Customize the name of the VM
+      prl.name = configuration["deploy"]["vm"]["provider"]["name"]
 
-  config.vm.provision "shell",
-    path: "provisioners/vscode.sh",
-    args: configuration["vscode"]["extensions"],
-    run: "always",
-    privileged: false
+      # Ensure the latest sets of Parallels utilities are installed
+      prl.update_guest_tools = true
+
+      # A full clone of th box is created
+      prl.linked_clone = false
+    end
+  end
 end
