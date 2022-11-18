@@ -29,3 +29,5 @@ for extension in "${extensions[@]}"; do
     echo "$script_warning: Cannot install code extension $extension"
   fi
 done
+
+exit 0

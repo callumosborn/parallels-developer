@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -17,3 +17,5 @@ aws configure set aws_access_key_id $1
 aws configure set aws_secret_access_key $2
 aws configure set default.region $3
 aws configure set default.output $4
+
+exit 0
