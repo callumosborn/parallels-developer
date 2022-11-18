@@ -13,4 +13,6 @@ echo "$script_name: Updating, upgrading and installing software packages"
 sudo apt-get update
 sudo apt-get upgrade -y
 
+chmod +x ~/provisioners/*.sh
+
 exit 0
