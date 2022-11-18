@@ -13,7 +13,10 @@ fi
 
 ip_address=$1
 
-# TODO: Check ~/.ssh/ed_25519 file exists.
-# TODO: $ ssh-copy-id -i ~/.ssh/ed_25519 vagrant@ip_address
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+  exit 1
+fi
+
+ssh-copy-id -i ~/.ssh/id_ed25519 vagrant@$ip_address
 
 exit 0
