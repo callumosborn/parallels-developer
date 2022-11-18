@@ -6,6 +6,9 @@
         "name": "<<The name of the virtual machine>>",
         "memory": "<<The amount of RAM>>"
       }
+    },
+    "docker": {
+      "context": "<<Default context to use>>"
     }
   },
   "deploy": {

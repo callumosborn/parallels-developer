@@ -121,6 +121,12 @@ Vagrant.configure("2") do |config|
       args: configuration["vscode"]["extensions"],
       run: "always",
       privileged: false
+
+    develop.vm.provision "shell",
+      path: "provisioners/docker-use-context.sh",
+      args: configuration["develop"]["docker"]["context"],
+      run: "always",
+      privileged: false
   end
 
   config.vm.define "deploy" do |deploy|
