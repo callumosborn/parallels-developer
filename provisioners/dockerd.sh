@@ -16,4 +16,6 @@ sudo systemctl daemon-reload
 
 sudo systemctl restart docker.service
 
+rm /home/vagrant/daemon.json
+
 exit 0
