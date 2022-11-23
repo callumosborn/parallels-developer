@@ -5,6 +5,9 @@
       "provider": {
         "name": "<<The name of the virtual machine>>",
         "memory": "<<The amount of RAM>>"
+      },
+      "network": {
+        "ip": "<<The static IP address for this machine>>"
       }
     },
     "docker": {
@@ -33,10 +36,5 @@
   },
   "repos": [
     "<<owner/repository>>"
-  ],
-  "vscode": {
-    "extensions": [
-      "<<extension id>>"
-    ]
-  }
+  ]
 }
