@@ -87,6 +87,10 @@ Vagrant.configure("2") do |config|
       privileged: false
 
     develop.vm.provision "shell",
+      path: "provisioners/minikube.sh",
+      privileged: false
+
+    develop.vm.provision "shell",
       path: "provisioners/repos.sh",
       args: configuration["repos"],
       run: "always",
