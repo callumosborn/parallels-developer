@@ -19,8 +19,11 @@ The recipes for the project can be found in the provisioners directory. For a ba
 - [git.sh](provisioners/git.sh)
 - [github.sh](provisioners/github.sh)
 - [repos.sh](provisioners/repos.sh)
-- [vscode.sh](provisioners/vscode.sh)
-- [docker-use-context.sh](provisioners/docker-use-context.sh)
+- [context.sh](provisioners/docker-use-context.sh)
+
+### Deploy
+
+- [dockerd.sh](provisioners/dockerd.sh)
 
 ## Getting Started
 
@@ -32,5 +35,4 @@ _GitHub Token_, the [personal access token](https://docs.github.com/en/authentic
 
 1. Populate a new file `config.json` from `config.example.json`.
 2. Launch a virtual machine `$ vagrant up`.
-3. Move SSH key to **deploy**: `$ ./provisioners/ssh-copy.sh`.
-4. Create Docker context for **deploy**: `$ ./provisioners/docker-context.sh`.
+3. Connect to the develop virtual machine `$ vagrant ssh develop`.
