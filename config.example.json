@@ -1,29 +1,12 @@
 {
-  "develop": {
-    "vm": {
-      "box": "<<The virtual machine OS>>",
-      "provider": {
-        "name": "<<The name of the virtual machine>>",
-        "memory": "<<The amount of RAM>>"
-      },
-      "network": {
-        "ip": "<<The static IP address for this machine>>"
-      }
+  "vm": {
+    "box": "<<The virtual machine OS>>",
+    "provider": {
+      "name": "<<The name of the virtual machine>>",
+      "memory": "<<The amount of RAM>>"
     },
-    "docker": {
-      "context": "<<Default context to use>>"
-    }
-  },
-  "deploy": {
-    "vm": {
-      "box": "<<The virtual machine OS>>",
-      "provider": {
-        "name": "<<The name of the virtual machine>>",
-        "memory": "<<The amount of RAM>>"
-      },
-      "network": {
-        "ip": "<<The static IP address for this machine>>"
-      }
+    "network": {
+      "ip": "<<The static IP address for this machine>>"
     }
   },
   "developer": {
