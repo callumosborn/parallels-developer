@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
 
     prl.name = configuration["vm"]["provider"]["name"]
 
-    prl.update_guest_tools = true
+    prl.update_guest_tools = false
 
     prl.linked_clone = false
   end
@@ -79,15 +79,5 @@ Vagrant.configure("2") do |config|
       configuration["github"]["title"],
       configuration["github"]["token"]
     ],
-    privileged: false
-
-  config.vm.provision "shell",
-    path: "provisioners/minikube.sh",
-    privileged: false
-
-  config.vm.provision "shell",
-    path: "provisioners/repos.sh",
-    args: configuration["repos"],
-    run: "always",
     privileged: false
 end
