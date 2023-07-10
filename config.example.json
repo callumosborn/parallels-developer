@@ -16,8 +16,5 @@
   "github": {
     "title": "<<The title to use for SSH key for GitHub>>",
     "token": "<<The personal access token used for GitHub>>"
-  },
-  "repos": [
-    "<<owner/repository>>"
-  ]
+  }
 }
