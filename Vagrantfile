@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
 
     prl.name = configuration["vm"]["provider"]["name"]
 
-    prl.update_guest_tools = true
+    prl.update_guest_tools = false
 
     prl.linked_clone = false
   end

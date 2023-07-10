@@ -2,28 +2,15 @@
 
 This project contains a collection of recipes to create a fully featured developer virtual machine configured for a variety of activities.
 
-Two virtual machines are created:
-- **Develop** is for housing repositories, writing code, etc.
-- **Deploy** is for running Docker containers.
-
 ## Recipes
 
 The recipes for the project can be found in the provisioners directory. For a background around provisioners, you can go to this [link](https://www.vagrantup.com/docs/provisioning).
 
 - [bootstrap.sh](provisioners/bootstrap.sh)
 - [docker.sh](provisioners/docker.sh)
-
-### Develop
-
 - [ssh.sh](provisioners/ssh.sh)
 - [git.sh](provisioners/git.sh)
 - [github.sh](provisioners/github.sh)
-- [repos.sh](provisioners/repos.sh)
-- [context.sh](provisioners/docker-use-context.sh)
-
-### Deploy
-
-- [dockerd.sh](provisioners/dockerd.sh)
 
 ## Getting Started
 
@@ -35,4 +22,4 @@ _GitHub Token_, the [personal access token](https://docs.github.com/en/authentic
 
 1. Populate a new file `config.json` from `config.example.json`.
 2. Launch a virtual machine `$ vagrant up`.
-3. Connect to the develop virtual machine `$ vagrant ssh develop`.
+3. Connect to the virtual machine `$ vagrant ssh`.
