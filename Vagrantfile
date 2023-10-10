@@ -29,55 +29,92 @@ def read(filename = "config.json")
   return data
 end
 
-configuration = read
+cfg = read
 
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
 Vagrant.configure("2") do |config|
-  config.vm.synced_folder "provisioners", "/home/vagrant/provisioners"
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
 
-  config.vm.box = configuration["vm"]["box"]
+  # Disable the default share of the current code directory. Doing this
+  # provides improved isolation between the vagrant box and your host
+  # by making sure your Vagrantfile isn't accessable to the vagrant box.
+  # If you use this you may want to enable additional shared subfolders as
+  # shown above.
+  config.vm.synced_folder ".", "/vagrant", disabled: true
 
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "bento/ubuntu-22.04"
+
+  # Vagrant will check for updates to the configured box on every vagrant up.
+  # If an update is found, Vagrant will tell the user.
+  # By default this is true.
+  # Updates will only be checked for boxes that properly support updates.
   config.vm.box_check_update = true
 
-  config.vm.network "private_network", ip: configuration["vm"]["network"]["ip"]
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.network "private_network", ip: "192.168.50.2"
 
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
   config.vm.provider "parallels" do |prl|
-    prl.memory = configuration["vm"]["provider"]["memory"]
 
-    prl.name = configuration["vm"]["provider"]["name"]
+    # You can customize the virtual machine name that appears in the Parallels Desktop GUI.
+    # By default, Vagrant sets it to the name of the folder containing the Vagrantfile plus a timestamp of when the machine was created.
+    prl.name = "parallels-developer"
 
-    prl.update_guest_tools = false
-
+    # Full clone is a full image copy, which is totally independent from the box.
     prl.linked_clone = false
+
+    # Sets the number of CPUs to be available to the virtual machine.
+    prl.cpus = 4
+
+    # Sets the amount of memory for the virtual machine (in megabytes).
+    prl.memory = 8192
   end
 
+  # Enable provisioning with a shell script.
+  # Path to a shell script to upload and execute.
   config.vm.provision "shell",
     path: "provisioners/bootstrap.sh",
     privileged: false
 
+  # Enable provisioning with a shell script.
+  # Path to a shell script to upload and execute.
   config.vm.provision "shell",
     path: "provisioners/docker.sh",
     privileged: false
 
+  # Enable provisioning with a shell script.
+  # Path to a shell script to upload and execute.
   config.vm.provision "shell",
     path: "provisioners/ssh.sh",
-    args: [
-      configuration["developer"]["email"]
-    ],
+    args: cfg["email"],
     privileged: false
 
+  # Enable provisioning with a shell script.
+  # Path to a shell script to upload and execute.
   config.vm.provision "shell",
     path: "provisioners/git.sh",
     args: [
-      configuration["developer"]["name"],
-      configuration["developer"]["email"]
+      cfg["name"],
+      cfg["email"]
     ],
     privileged: false
 
+  # Enable provisioning with a shell script.
+  # Path to a shell script to upload and execute.
   config.vm.provision "shell",
     path: "provisioners/github.sh",
     args: [
-      configuration["github"]["title"],
-      configuration["github"]["token"]
+      cfg["github"]["title"],
+      cfg["github"]["token"]
     ],
     privileged: false
 end

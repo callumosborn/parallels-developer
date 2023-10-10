@@ -1,18 +1,6 @@
 {
-  "vm": {
-    "box": "<<The virtual machine OS>>",
-    "provider": {
-      "name": "<<The name of the virtual machine>>",
-      "memory": "<<The amount of RAM>>"
-    },
-    "network": {
-      "ip": "<<The static IP address for this machine>>"
-    }
-  },
-  "developer": {
-    "name": "<<The full name of the developer>>",
-    "email": "<<The email address of the developer>>"
-  },
+  "name": "<<The full name of the developer>>",
+  "email": "<<The email address of the developer>>",
   "github": {
     "title": "<<The title to use for SSH key for GitHub>>",
     "token": "<<The personal access token used for GitHub>>"
