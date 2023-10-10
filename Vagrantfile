@@ -51,6 +51,11 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "bento/ubuntu-22.04"
 
+  # The hostname the machine should have.
+  # If set to a string, the hostname will be set on boot.
+  # If set, Vagrant will update /etc/hosts on the guest with the configured hostname.
+  config.vm.hostname = "parallels-developer"
+
   # Vagrant will check for updates to the configured box on every vagrant up.
   # If an update is found, Vagrant will tell the user.
   # By default this is true.
