@@ -82,6 +82,9 @@ Vagrant.configure("2") do |config|
 
     # Sets the amount of memory for the virtual machine (in megabytes).
     prl.memory = 8192
+
+    # Automatically update Parallels tools.
+    prl.update_guest_tools = true
   end
 
   # Enable provisioning with a shell script.

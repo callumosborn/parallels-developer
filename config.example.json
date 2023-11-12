@@ -1,8 +1,8 @@
 {
-  "name": "<<The full name of the developer>>",
-  "email": "<<The email address of the developer>>",
+  "name": "...",
+  "email": "...",
   "github": {
-    "title": "<<The title to use for SSH key for GitHub>>",
-    "token": "<<The personal access token used for GitHub>>"
+    "title": "...",
+    "token": "..."
   }
 }
