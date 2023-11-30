@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 if [[ $# -ne 1 ]]; then
   echo "$script_error: Expecting 1 argument to be provided: email"
   exit 1

@@ -125,4 +125,14 @@ Vagrant.configure("2") do |config|
       cfg["github"]["token"]
     ],
     privileged: false
+
+  config.vm.provision "shell",
+    path: "provisioners/minikube.sh",
+    privileged: false
+
+  config.vm.provision "shell",
+    inline: "minikube start",
+    privileged: false,
+    run: "always"
+
 end
