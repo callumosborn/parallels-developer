@@ -4,4 +4,4 @@ mkdir ~/downloads
 mkdir ~/projects
 
 sudo apt-get update
-sudo apt-get install jq git-all -y
+sudo apt-get install git-all -y
