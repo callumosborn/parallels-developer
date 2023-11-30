@@ -8,8 +8,6 @@ echo 'alias kubectl="minikube kubectl --"' >> ~/.bashrc
 
 minikube start
 
-minikube dashboard
-
 minikube stop
 
 rm minikube-linux-amd64
