@@ -11,3 +11,5 @@ minikube start
 minikube dashboard
 
 minikube stop
+
+rm minikube-linux-amd64
