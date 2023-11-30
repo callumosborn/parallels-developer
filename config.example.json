@@ -1,4 +1,11 @@
 {
+  "virtual_machine": {
+    "box": "...",
+    "name": "...",
+    "ip": "...",
+    "cpus": 4,
+    "memory": 8192
+  },
   "name": "...",
   "email": "...",
   "github": {
