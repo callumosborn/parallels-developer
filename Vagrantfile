@@ -49,12 +49,12 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "bento/ubuntu-22.04"
+  config.vm.box = cfg["virtual_machine"]["box"]
 
   # The hostname the machine should have.
   # If set to a string, the hostname will be set on boot.
   # If set, Vagrant will update /etc/hosts on the guest with the configured hostname.
-  config.vm.hostname = "parallels-developer"
+  config.vm.hostname = cfg["virtual_machine"]["name"]
 
   # Vagrant will check for updates to the configured box on every vagrant up.
   # If an update is found, Vagrant will tell the user.
@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.50.2"
+  config.vm.network "private_network", ip: cfg["virtual_machine"]["ip"]
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -72,19 +72,20 @@ Vagrant.configure("2") do |config|
 
     # You can customize the virtual machine name that appears in the Parallels Desktop GUI.
     # By default, Vagrant sets it to the name of the folder containing the Vagrantfile plus a timestamp of when the machine was created.
-    prl.name = "parallels-developer"
+    prl.name = cfg["virtual_machine"]["name"]
 
     # Full clone is a full image copy, which is totally independent from the box.
     prl.linked_clone = false
 
     # Sets the number of CPUs to be available to the virtual machine.
-    prl.cpus = 4
+    prl.cpus = cfg["virtual_machine"]["cpus"]
 
     # Sets the amount of memory for the virtual machine (in megabytes).
-    prl.memory = 8192
+    prl.memory = cfg["virtual_machine"]["memory"]
 
     # Automatically update Parallels tools.
     prl.update_guest_tools = true
+
   end
 
   # Enable provisioning with a shell script.
@@ -125,4 +126,5 @@ Vagrant.configure("2") do |config|
       cfg["github"]["token"]
     ],
     privileged: false
+
 end
