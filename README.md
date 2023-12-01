@@ -2,15 +2,14 @@
 
 This project contains a collection of recipes to create a fully featured developer virtual machine configured for a variety of activities.
 
-## Recipes
+## Provisioners
 
-The recipes for the project can be found in the provisioners directory. For a background around provisioners, you can go to this [link](https://www.vagrantup.com/docs/provisioning).
+The provisioners for the project can be found in the provisioners directory.
 
-- [bootstrap.sh](provisioners/bootstrap.sh)
-- [docker.sh](provisioners/docker.sh)
 - [ssh.sh](provisioners/ssh.sh)
 - [git.sh](provisioners/git.sh)
 - [github.sh](provisioners/github.sh)
+- [minikube.sh](provisioners/minikube.sh)
 
 ## Getting Started
 
