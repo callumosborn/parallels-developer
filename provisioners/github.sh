@@ -1,9 +1,8 @@
-#! /usr/bin/env bash
-
-if [[ $# -ne 2 ]]; then
-  echo "$script_error: Expecting 2 arguments to be provided: title and token"
-  exit 1
-fi
+#!/usr/bin/env bash
+#: This script will:
+#: - download and install the GitHub CLI
+#: - authenticate with the GitHub host
+#: - add public SSH authentication key to a GitHub account
 
 title=$1
 token=$2
@@ -12,8 +11,7 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
-sudo apt-get update
-sudo apt-get install gh -y
+sudo apt-get update && sudo apt-get install gh -y
 
 cat <<< $token | gh auth login --git-protocol ssh --with-token
 
@@ -23,7 +21,4 @@ ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
 
 ssh -T git@github.com &> /dev/null
 
-if [[ $? -ne 1 ]]; then
-  echo "$script_error: SSH connection cannot be established to github.com"
-  exit 2
-fi
+exit 0

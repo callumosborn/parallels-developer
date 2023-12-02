@@ -11,5 +11,10 @@
   "github": {
     "title": "...",
     "token": "..."
+  },
+  "options": {
+    "is_docker": false,
+    "is_source_control": false,
+    "is_minikube": false
   }
 }

@@ -88,43 +88,61 @@ Vagrant.configure("2") do |config|
 
   end
 
-  # Enable provisioning with a shell script.
-  # Path to a shell script to upload and execute.
-  config.vm.provision "shell",
-    path: "provisioners/bootstrap.sh",
-    privileged: false
+  if cfg["options"]["is_docker"]
+    config.vm.provision "docker" do |d|
+    end
+  end
 
-  # Enable provisioning with a shell script.
-  # Path to a shell script to upload and execute.
-  config.vm.provision "shell",
-    path: "provisioners/docker.sh",
-    privileged: false
+  if cfg["options"]["is_minikube"]
+    config.vm.provision "minikube",
+      type: "shell",
+      path: "provisioners/minikube.sh",
+      privileged: false
+  end
 
-  # Enable provisioning with a shell script.
-  # Path to a shell script to upload and execute.
-  config.vm.provision "shell",
-    path: "provisioners/ssh.sh",
-    args: cfg["email"],
-    privileged: false
+  if cfg["options"]["is_source_control"]
+    config.vm.provision "ssh",
+      type: "shell",
+      path: "provisioners/ssh.sh",
+      args: cfg["email"],
+      privileged: false
 
-  # Enable provisioning with a shell script.
-  # Path to a shell script to upload and execute.
-  config.vm.provision "shell",
-    path: "provisioners/git.sh",
-    args: [
-      cfg["name"],
-      cfg["email"]
-    ],
-    privileged: false
+    config.vm.provision "git",
+      type: "shell",
+      path: "provisioners/git.sh",
+      args: [
+        cfg["name"],
+        cfg["email"]
+      ],
+      privileged: false
 
-  # Enable provisioning with a shell script.
-  # Path to a shell script to upload and execute.
-  config.vm.provision "shell",
-    path: "provisioners/github.sh",
-    args: [
-      cfg["github"]["title"],
-      cfg["github"]["token"]
-    ],
-    privileged: false
+    config.vm.provision "github",
+      type: "shell",
+      path: "provisioners/github.sh",
+      args: [
+        cfg["github"]["title"],
+        cfg["github"]["token"]
+      ],
+      privileged: false
+  end
 
+  if cfg["options"]["is_minikube"]
+    config.trigger.after :up do |trigger|
+      trigger.name = "minikube"
+      trigger.info = "Starting a cluster..."
+      trigger.run_remote = {
+        inline: "minikube start",
+        privileged: false
+      }
+    end
+
+    config.trigger.before :halt do |trigger|
+      trigger.name = "minikube"
+      trigger.info = "Stopping a cluster..."
+      trigger.run_remote = {
+        inline: "minikube stop",
+        privileged: false
+      }
+    end
+  end
 end
