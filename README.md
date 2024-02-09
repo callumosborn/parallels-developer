@@ -6,11 +6,6 @@ This project contains a collection of recipes to create a fully featured develop
 
 The provisioners for the project can be found in the provisioners directory.
 
-- [ssh.sh](provisioners/ssh.sh)
-- [git.sh](provisioners/git.sh)
-- [github.sh](provisioners/github.sh)
-- [minikube.sh](provisioners/minikube.sh)
-
 ## Getting Started
 
 [config.example.json](config.example.json) provides you the ability to customize a few details of the virtual machine that you will bring up.
