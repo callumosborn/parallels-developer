@@ -96,20 +96,20 @@ Vagrant.configure("2") do |config|
   if cfg["options"]["is_minikube"]
     config.vm.provision "minikube",
       type: "shell",
-      path: "provisioners/minikube.sh",
+      path: "provisioners/install_minikube.sh",
       privileged: false
   end
 
   if cfg["options"]["is_source_control"]
     config.vm.provision "ssh",
       type: "shell",
-      path: "provisioners/ssh.sh",
+      path: "provisioners/generate_ssh.sh",
       args: cfg["email"],
       privileged: false
 
     config.vm.provision "git",
       type: "shell",
-      path: "provisioners/git.sh",
+      path: "provisioners/install_git.sh",
       args: [
         cfg["name"],
         cfg["email"]
@@ -118,7 +118,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "github",
       type: "shell",
-      path: "provisioners/github.sh",
+      path: "provisioners/install_github.sh",
       args: [
         cfg["github"]["title"],
         cfg["github"]["token"]
