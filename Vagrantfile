@@ -50,6 +50,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = cfg["virtual_machine"]["box"]
+  config.vm.box_version = cfg["virtual_machine"]["box_version"]
 
   # The hostname the machine should have.
   # If set to a string, the hostname will be set on boot.
@@ -97,6 +98,11 @@ Vagrant.configure("2") do |config|
     config.vm.provision "minikube",
       type: "shell",
       path: "provisioners/install_minikube.sh",
+      privileged: false
+
+    config.vm.provision "helm",
+      type: "shell",
+      path: "provisioners/install_helm.sh",
       privileged: false
   end
 

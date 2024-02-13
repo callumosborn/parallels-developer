@@ -1,6 +1,7 @@
 {
   "virtual_machine": {
     "box": "...",
+    "box_version": "",
     "name": "...",
     "ip": "...",
     "cpus": 4,
